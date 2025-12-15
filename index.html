@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Renamer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Load PDF.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>📄 Intelligent PDF Renamer</h1>
+            <p>Drag and drop academic papers to automatically rename them based on their titles.</p>
+        </header>
+
+        <main>
+            <div id="drop-zone" class="drop-zone">
+                <div class="drop-content">
+                    <svg class="icon" viewBox="0 0 24 24" width="48" height="48">
+                        <path fill="currentColor" d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                    <p>Drag & Drop PDF files here</p>
+                    <p class="sub-text">or click to select files</p>
+                    <input type="file" id="file-input" accept="application/pdf" multiple hidden>
+                </div>
+            </div>
+
+            <div id="file-list" class="file-list">
+                <!-- File items will be injected here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Templates -->
+    <template id="file-item-template">
+        <div class="file-item">
+            <div class="file-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+            </div>
+            <div class="file-info">
+                <div class="original-name">Original: <span class="name-text"></span></div>
+                <div class="input-group">
+                    <input type="text" class="new-name-input" placeholder="New filename">
+                    <span class="extension">.pdf</span>
+                </div>
+                <div class="status-message"></div>
+            </div>
+            <div class="file-actions">
+                <button class="btn-download" disabled>
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                    </svg>
+                </button>
+                <button class="btn-remove" aria-label="Remove">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <script type="module" src="./src/app.js"></script>
+</body>
+</html>
