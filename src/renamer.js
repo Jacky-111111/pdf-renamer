@@ -81,8 +81,11 @@ export function cleanFilename(text, isFallback = false) {
 
     let clean = text.trim();
 
-    // Remove forbidden file characters
-    clean = clean.replace(/[<>:"/\\|?*]/g, '');
+    // Replace colons (and surrounding spaces) with underscore - no space after
+    clean = clean.replace(/\s*:\s*/g, '_');
+
+    // Remove other forbidden file characters
+    clean = clean.replace(/[<>"/\\|?*]/g, '');
 
     // Normalize spaces
     clean = clean.replace(/\s+/g, ' ');
